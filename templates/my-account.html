@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basreng si Boseng</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="eCommerce HTML Template Free Download" name="keywords">
+        <meta content="eCommerce HTML Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick-theme.css') }}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Top bar Start -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-envelope"></i>
+                        raflymaulannasirkss@gmail.com
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone-alt"></i>
+                        +62 816-8064-13
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top bar End -->
+        
+        <!-- Nav Bar Start -->
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="{{ url_for('home') }} " class="navbar-brand">Beranda</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Beranda</a>
+                            <a href="{{ url_for('product') }}" class="nav-item nav-link">Produk</a>
+                            <a href="{{ url_for('product_detail') }}" class="nav-item nav-link">Detail Produk</a>
+                            <a href="{{ url_for('cart') }}" class="nav-item nav-link">Keranjang</a>
+                            <a href="{{ url_for('checkout') }}" class="nav-item nav-link">Pembayaran</a>
+                            <a href="{{ url_for('my_account') }}" class="nav-item nav-link active">Akun Saya</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Halaman Lainnya</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('wishlist') }}" class="dropdown-item">Daftar Keinginan</a>
+                                    <a href="{{ url_for('my_account') }}" class="dropdown-item">Masuk & Daftar</a>
+                                    <a href="{{ url_for('contact') }}" class="dropdown-item">Hubungi Kami</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                {% if current_user.is_authenticated %}
+                                    <a href="{{ url_for('my_account') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url_for('my_account') }}" class="dropdown-item">Akun Saya</a>
+                                        <a href="{{ url_for('logout') }}" class="dropdown-item">Keluar</a>
+                                    </div>
+                                {% else %}
+                                    <a href="{{ url_for('my_account') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">Masuk & Daftar</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url_for('login') }}" class="dropdown-item">Masuk</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->      
+        
+        <!-- Bottom Bar Start -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <input type="text" placeholder="Search">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="user">
+                            <a href="{{ url_for('wishlist') }}" class="btn wishlist">
+                                <i class="fa fa-heart"></i>
+                                <span>(0)</span>
+                            </a>
+                            <a href="{{ url_for('cart') }}" class="btn cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>(0)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar End --> 
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Akun Saya</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Pesanan</a>
+                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Pembayaran</a>
+                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>Alamat</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Detail Akun</a>
+                            <a class="nav-link" href="{{ url_for('logout') }}"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+                                <h4>Dashboard</h4>
+                                <p>Selamat datang {{ current_user.username }}!</p>
+                            </div>
+                            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Produk</th>
+                                                <th>Tanggal</th>
+                                                <th>Harga</th>
+                                                <th>Status</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Karedok Basreng</td>
+                                                <td>01 Jan 2025</td>
+                                                <td>Rp8.000</td>
+                                                <td>Disetujui</td>
+                                                <td><button class="btn">Lihat</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Basreng kering</td>
+                                                <td>01 Jan 2025</td>
+                                                <td>Rp10.000</td>
+                                                <td>Disetujui</td>
+                                                <td><button class="btn">Lihat</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Bunga Basreng</td>
+                                                <td>01 Jan 2025</td>
+                                                <td>Rp10.000</td>
+                                                <td>Disetujui</td>
+                                                <td><button class="btn">Lihat</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
+                                <h4>Metode Pembayaran</h4>
+                                <p>
+                                    Dana,
+                                </p> 
+                            </div>
+                            <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                                <h4>Alamat</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Alamat Pembayaran</h5>
+                                        <p>Jl. Adikusumah No.12, Baleendah, Kec. Baleendah, Kabupaten Bandung, Jawa Barat 40375</p>
+                                        <button class="btn">Edit Alamat</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Alamat Pengiriman</h5>
+                                        <p>Jl. Adikusumah No.12, Baleendah, Kec. Baleendah, Kabupaten Bandung, Jawa Barat 40375</p>
+                                        <p>Mobile: 0816-8064-16</p>
+                                        <button class="btn">Edit Alamat</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                                <h4>Detail Akun</h4>
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                                
+                                <form action="{{ url_for('update_account') }}" method="POST">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="username" value="{{ current_user.username }}" placeholder="Username">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="phone" value="{{ current_user.phone }}" placeholder="No. HP">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="email" name="email" value="{{ current_user.email }}" placeholder="Email">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="form-control" type="text" name="address" value="{{ current_user.address }}" placeholder="Alamat">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn" type="submit">Perbarui Akun</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <h4>Ganti Password</h4>
+                                <form action="{{ url_for('change_password') }}" method="POST">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input class="form-control" type="password" name="current_password" placeholder="Password Saat Ini" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="password" name="new_password" placeholder="Password Baru" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn" type="submit">Ubah Password</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+        
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Hubungi Kami</h2>
+                            <div class="contact-info">
+                                <p><i class="fa fa-map-marker"></i>Kp. Rancabogo Rt02 Rw07 Des. Sagaracipta 40381</p>
+                                <p><i class="fa fa-envelope"></i>raflymaulannasirkss@gmail.com</p>
+                                <p><i class="fa fa-phone"></i>+62 816-8064-13</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Follow Us</h2>
+                            <div class="contact-info">
+                                <div class="social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Informasi Perusahaan</h2>
+                            <ul>
+                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="#">Kebijakan Privasi</a></li>
+                                <li><a href="#">Syarat & Ketentuan</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Purchase Info</h2>
+                            <ul>
+                                <li><a href="#">Pyament Policy</a></li>
+                                <li><a href="#">Shipping Policy</a></li>
+                                <li><a href="#">Return Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row payment align-items-center">
+                    <div class="col-md-6">
+                        <div class="payment-method">
+                            <h2>Dukungan:</h2>
+                            <img src="{{ url_for('static', filename='img/payment-method.png') }}" alt="Payment Method" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-security">
+                            <h2>Secured By:</h2>
+                            <img src="{{ url_for('static', filename='img/godaddy.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/norton.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/ssl.svg') }}" alt="Payment Security" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Copyright & copy; <a href="{{ url_for('home') }}">Basreng si Boseng</a>. All Rights Reserved</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">
+						<!--/*** This template is free as long as you keep the footer author's credit link/attribution link/backlink. If you'd like to use the template without the footer author's credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <p>Designed By <a href="https://github.com/Raflymaulannasir">Rafly Boseng</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->      
+        
+        <!-- Back to Top -->
+        <a href="{{ url_for('home') }}" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/slick/slick.min.js') }}"></script>
+        
+        <!-- Template Javascript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </body>
+</html>

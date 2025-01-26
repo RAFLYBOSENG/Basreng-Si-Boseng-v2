@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="utf-8">
+        <title>Basreng si Boseng</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Template HTML eCommerce Gratis" name="keywords">
+        <meta content="Template HTML eCommerce Gratis" name="description">
+
+        <!-- Favicon -->
+        <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick-theme.css') }}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Bar Atas Mulai -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-envelope"></i>
+                        raflymaulannasirkss@gmail.com
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone-alt"></i>
+                        +62 816-468-064-13
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bar Atas Selesai -->
+        
+        <!-- Bar Navigasi Mulai -->
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="{{ url_for('home') }}" class="navbar-brand">Beranda</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="{{ url_for('home') }}" class="nav-item nav-link active">Beranda</a>
+                            <a href="{{ url_for('product') }}" class="nav-item nav-link">Produk</a>
+                            <a href="{{ url_for('product_detail') }}" class="nav-item nav-link">Detail Produk</a>
+                            <a href="{{ url_for('cart') }}" class="nav-item nav-link">Keranjang</a>
+                            <a href="{{ url_for('checkout') }}" class="nav-item nav-link">Pembayaran</a>
+                            <a href="{{ url_for('my_account') }}" class="nav-item nav-link">Akun Saya</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Halaman Lainnya</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('wishlist') }}" class="dropdown-item">Daftar Keinginan</a>
+                                    <a href="{{ url_for('my_account') }}" class="dropdown-item">Masuk & Daftar</a>
+                                    <a href="{{ url_for('contact') }}" class="dropdown-item">Hubungi Kami</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                {% if current_user.is_authenticated %}
+                                    <a href="{{ url_for('my_account') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url_for('my_account') }}" class="dropdown-item">Akun Saya</a>
+                                        <a href="{{ url_for('logout') }}" class="dropdown-item">Keluar</a>
+                                    </div>
+                                {% else %}
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun Pengguna</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{{ url_for('login') }}" class="dropdown-item">Masuk</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Bar Navigasi Selesai -->      
+        
+        <!-- Bar Bawah Mulai -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <input type="text" placeholder="Cari">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="user">
+                            <a href="{{ url_for('wishlist') }}" class="btn wishlist">
+                                <i class="fa fa-heart"></i>
+                                <span>(5)</span>
+                            </a>
+                            <a href="{{ url_for('cart') }}" class="btn cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>(5)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bar Bawah Selesai -->       
+        
+        <!-- Slider Utama Mulai -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <nav class="navbar bg-light">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('home') }}"><i class="fa fa-home"></i>Beranda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('product') }}"><i class="fa fa-shopping-bag"></i>Terlaris</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="header-slider normal-slider">
+                            <div class="header-slider-item">
+                                <img src="{{ url_for('static', filename='img/slider-1.jpg') }}" alt="Gambar Slider" />
+                                <div class="header-slider-caption">
+                                    <p>Basreng iyeu anu paling enak!!</p>
+                                    <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                </div>
+                            </div>
+                            <div class="header-slider-item">
+                                <img src="{{ url_for('static', filename='img/slider-2.jpg') }}" alt="Gambar Slider" />
+                                <div class="header-slider-caption">
+                                    <p>ini yang aku suka kamu juga suka</p>
+                                    <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                </div>
+                            </div>
+                            <div class="header-slider-item">
+                                <img src="{{ url_for('static', filename='img/slider-3.jpg') }}" alt="Gambar Slider" />
+                                <div class="header-slider-caption">
+                                    <p>si paling nyaman untuk menemani kamu disaat galau</p>
+                                    <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="header-img">
+                            <div class="img-item">
+                                <img src="{{ url_for('static', filename='img/category-1.jpg') }}" />
+                                <a class="img-text" href="{{ url_for('product_detail') }}">
+                                    <p>Rasa Original + Daun Jeruk</p>
+                                </a>
+                            </div>
+                            <div class="img-item">
+                                <img src="{{ url_for('static', filename='img/category-2.jpg') }}" />
+                                <a class="img-text" href="{{ url_for('product_detail') }}">
+                                    <p>Rasa Pedas + Daun Jeruk</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Utama Selesai -->      
+        
+        <!-- Merek Mulai -->
+        <div class="brand">
+            <div class="container-fluid">
+                <div class="brand-slider">
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-1.png') }}" alt="merek-1"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-2.png') }}" alt="merek-2"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-3.png') }}" alt="merek-3"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-4.png') }}" alt="merek-4"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-5.png') }}" alt="merek-5"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-6.png') }}" alt="merek-6"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-7.png') }}" alt="merek-7"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-8.png') }}" alt="merek-8"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Merek Selesai -->      
+        
+        <!-- Fitur Mulai-->
+        <div class="feature">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fab fa-cc-mastercard"></i>
+                            <h2>Pembayaran Aman</h2>
+                            <p>
+                                Bebas Pilih Pembayaran
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fa fa-truck"></i>
+                            <h2>Pengiriman ke Seluruh Dunia</h2>
+                            <p>
+                                Bisa Dikirim Kemana Saja
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 feature-col">
+                        <div class="feature-content">
+                            <i class="fa fa-comments"></i>
+                            <h2>Layanan 1/13</h2>
+                            <p>
+                                Kita Layani setiap hari (07.00 - 20.00)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fitur Selesai-->      
+        
+        <!-- Kategori Mulai-->
+        <div class="category">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="category-item ch-400">
+                            <img src="{{ url_for('static', filename='img/category-3.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>Basreng iyeu anu paling enak!!</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="category-item ch-250">
+                            <img src="{{ url_for('static', filename='img/category-4.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>ini yang aku suka kamu juga suka</p>
+                            </a>
+                        </div>
+                        <div class="category-item ch-150">
+                            <img src="{{ url_for('static', filename='img/category-5.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>si paling nyaman untuk menemani kamu disaat galau</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="category-item ch-150">
+                            <img src="{{ url_for('static', filename='img/category-6.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>butuh teman untuk nonton?</p>
+                            </a>
+                        </div>
+                        <div class="category-item ch-250">
+                            <img src="{{ url_for('static', filename='img/category-7.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>Asikin saja harimu ditemenin basreng si boseng</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="category-item ch-400">
+                            <img src="{{ url_for('static', filename='img/category-8.jpg') }}" />
+                            <a class="category-name" href="{{ url_for('product_detail') }}">
+                                <p>#BersahabatDenganGigi</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Kategori Selesai-->       
+        
+        <!-- Ajakan Bertindak Mulai -->
+        <div class="call-to-action">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1>hubungi kami untuk pertanyaan apa pun</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="tel:081646806413">+62 816-468-064-13</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ajakan Bertindak Selesai -->       
+        
+        <!-- Produk Unggulan Mulai -->
+        <div class="featured-product product">
+            <div class="container-fluid">
+                <div class="section-header">
+                    <h1>Produk Unggulan</h1>
+                </div>
+                <div class="row align-items-center product-slider product-slider-4">
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Karedok Basreng </a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-1.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Basreng Kering</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-2.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Bunga Basreng </a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-3.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">basreng keriuk</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-4.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">basreng beukah</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-5.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produk Unggulan Selesai -->       
+        
+        <!-- Newsletter Mulai -->
+        <div class="newsletter">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Berlangganan Toko Kami</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form">
+                            <input type="email" value="Email Anda di sini">
+                            <button>Kirim</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Newsletter Selesai -->        
+        
+        <!-- Produk Terbaru Mulai -->
+        <div class="recent-product product">
+            <div class="container-fluid">
+                <div class="section-header">
+                    <h1>Produk Terbaru</h1>
+                </div>
+                <div class="row align-items-center product-slider product-slider-4">
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Makaroni Pedas</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-6.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Kerupuk Putih Pedas</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-7.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Sebring Pedas</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-8.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="{{ url_for('product_detail') }}">Kerupuk Putih Original</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-9.jpg') }}" alt="Gambar Produk">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#">Kemplang Pedas</a>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ url_for('product_detail') }}">
+                                    <img src="{{ url_for('static', filename='img/product-10.jpg') }}" alt="Product Image">
+                                </a>
+                                <div class="product-action">
+                                    <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <h3><span>Rp. </span>8.000</h3>
+                                <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Product End -->
+        
+        <!-- Review Start -->
+        <div class="review">
+            <div class="container-fluid">
+                <div class="row align-items-center review-slider normal-slider">
+                    <div class="col-md-6">
+                        <div class="review-slider-item">
+                            <div class="review-img">
+                                <img src="{{ url_for('static', filename='img/review-1.jpg') }}" alt="Image">
+                            </div>
+                            <div class="review-text">
+                                <h2>Randy Orton</h2>
+                                <h3>Mahasiswa</h3>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p>
+                                    Terbaik Mas Boseng Enak rasanya
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="review-slider-item">
+                            <div class="review-img">
+                                <img src="{{ url_for('static', filename='img/review-2.jpg') }}" alt="Image">
+                            </div>
+                            <div class="review-text">
+                                <h2>Setiawan Hadi</h2>
+                                <h3>Mahasiswa</h3>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p>
+                                    Asa Pengen Beli Lagi Euyyy~
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="review-slider-item">
+                            <div class="review-img">
+                                <img src="{{ url_for('static', filename='img/review-5.jpg') }}" alt="Image">
+                            </div>
+                            <div class="review-text">
+                                <h2>Zacky Artha</h2>
+                                <h3>Mahasiswa</h3>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p>
+                                    Enaknya Sampai Kebawa Mimpi
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="review-slider-item">
+                            <div class="review-img">
+                                <img src="{{ url_for('static', filename='img/review-4.jpg') }}" alt="Image">
+                            </div>
+                            <div class="review-text">
+                                <h2>M Shidiq</h2>
+                                <h3>Mahasiswa</h3>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p>
+                                    Enak pisan Fly euyyy recomended👍
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="review-slider-item">
+                            <div class="review-img">
+                                <img src="{{ url_for('static', filename='img/review-3.jpg') }}" alt="Image">
+                            </div>
+                            <div class="review-text">
+                                <h2>Daffa Nasrullah</h2>
+                                <h3>Mahasiswa</h3>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p>
+                                    Alaah Enak Banget, Cocok Juga Jadi Temen Nasi
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Review End -->        
+        
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Hubungi</h2>
+                            <div class="contact-info">
+                                <p><i class="fa fa-map-marker"></i>Kp. Rancabogo Rt02 Rw07 Des. Sagaracipta 40381</p>
+                                <p><i class="fa fa-envelope"></i>raflymaulannasirkss@gmail.com</p>
+                                <p><i class="fa fa-phone"></i>+62 816-468-064-13</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Follow Us</h2>
+                            <div class="contact-info">
+                                <div class="social">
+                                    <a href="https://twitter.com/Raflymaulannasir"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.facebook.com/raflymaulannasir"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.linkedin.com/in/raflymaulannasir"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://www.instagram.com/raflymaulannasir"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.youtube.com/raflymaulannasir"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Company Info</h2>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Condition</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Purchase Info</h2>
+                            <ul>
+                                <li><a href="#">Payment Policy</a></li>
+                                <li><a href="#">Shipping Policy</a></li>
+                                <li><a href="#">Return Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row payment align-items-center">
+                    <div class="col-md-6">
+                        <div class="payment-method">
+                            <h2>Kami menerima:</h2>
+                            <img src="{{ url_for('static', filename='img/payment-method.png') }}" alt="Payment Method" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-security">
+                            <h2>Diamankan Oleh:</h2>
+                            <img src="{{ url_for('static', filename='img/godaddy.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/norton.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/ssl.svg') }}" alt="Payment Security" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Copyright & copy; <a href="#">Basreng si Boseng</a>. All Rights Reserved</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">
+						<!--/*** This template is free as long as you keep the footer author's credit link/attribution link/backlink. If you'd like to use the template without the footer author's credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <p>Designed By <a href="https://github.com/Raflymaulannasir">Rafly Boseng</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->       
+        
+        <!-- Back to Top -->
+        <a href="{{ url_for('home') }}" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/slick/slick.min.js') }}"></script>
+        
+        <!-- Template Javascript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </body>
+</html>

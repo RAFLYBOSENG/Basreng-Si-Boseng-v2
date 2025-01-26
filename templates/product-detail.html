@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basreng si Boseng</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="eCommerce HTML Template Free Download" name="keywords">
+        <meta content="eCommerce HTML Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick-theme.css') }}" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Top bar Start -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-envelope"></i>
+                        raflymaulannasirkss@gmail.com
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone-alt"></i>
+                        +62 816-8064-13
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top bar End -->
+        
+        <!-- Nav Bar Start -->
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="{{ url_for('home') }}" class="navbar-brand">Beranda</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Beranda</a>
+                            <a href="{{ url_for('product') }}" class="nav-item nav-link">Produk</a>
+                            <a href="{{ url_for('product_detail') }}" class="nav-item nav-link active">Detail Produk</a>
+                            <a href="{{ url_for('cart') }}" class="nav-item nav-link">Keranjang</a>
+                            <a href="{{ url_for('checkout') }}" class="nav-item nav-link">Pembayaran</a>
+                            <a href="{{ url_for('my_account') }}" class="nav-item nav-link">Akun Saya</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Halaman Lainnya</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('wishlist') }}" class="dropdown-item">Daftar Keinginan</a>
+                                    <a href="{{ url_for('my_account') }}" class="dropdown-item">Masuk & Daftar</a>
+                                    <a href="{{ url_for('contact') }}" class="dropdown-item">Hubungi Kami</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="{{ url_for('my_account') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun Pengguna</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('login') }}" class="dropdown-item">Masuk</a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->      
+        
+        <!-- Bottom Bar Start -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <input type="text" placeholder="Search">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="user">
+                            <a href="{{ url_for('wishlist') }}" class="btn wishlist">
+                                <i class="fa fa-heart"></i>
+                                <span>(0)</span>
+                            </a>
+                            <a href="{{ url_for('cart') }}" class="btn cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>(0)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar End --> 
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('product') }}">Produk</a></li>
+                    <li class="breadcrumb-item active">Detail Produk</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Product Detail Start -->
+        <div class="product-detail">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="product-detail-top">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <div class="product-slider-single normal-slider">
+                                        <img src="{{ url_for('static', filename='img/product-1.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-2.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-3.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-4.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-5.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-6.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-7.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-8.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-9.jpg') }}" alt="Product Image">
+                                        <img src="{{ url_for('static', filename='img/product-10.jpg') }}" alt="Product Image">
+                                    </div>
+                                    <div class="product-slider-single-nav normal-slider">
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-1.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-2.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-3.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-4.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-5.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-6.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-7.jpg') }}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img src="{{ url_for('static', filename='img/product-8.jpg') }}" alt="Product Image"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-content">
+                                        <div class="title">
+                                            <h2>Basreng si Boseng</h2>
+                                        </div>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="price">
+                                            <h4>Harga:</h4>
+                                            <p>Rp 8.000 <span>Rp 10.000</span></p>
+                                        </div>
+                                        <div class="quantity">
+                                            <h4>Jumlah:</h4>
+                                            <div class="qty">
+                                                <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                <input type="text" value="1">
+                                                <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="p-color">
+                                            <h4>Varian:</h4>
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn">Pedas</button>
+                                                <button type="button" class="btn">Original</button>
+                                                <button type="button" class="btn">Karedok</button>
+                                            </div> 
+                                        </div>
+                                        <div class="action">
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Tambah ke Keranjang</a>
+                                            <a class="btn" href="{{ url_for('checkout') }}"><i class="fa fa-shopping-bag"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row product-detail-bottom">
+                            <div class="col-lg-12">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="pill" href="#description">Deskripsi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#specification">Spesifikasi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="pill" href="#reviews">Ulasan (1)</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="description" class="container tab-pane active">
+                                        <h4>Deskripsi Produk</h4>
+                                        <p>
+                                            Basreng Si Boseng adalah cemilan khas Sunda yang terbuat dari olahan ikan tenggiri pilihan yang diolah dengan bumbu-bumbu berkualitas. Rasanya yang gurih dan renyah menjadikan Basreng Si Boseng sebagai cemilan yang cocok untuk menemani waktu santai Anda. Tersedia dalam berbagai varian rasa dan ukuran yang bisa Anda pilih sesuai selera.
+                                        </p>
+                                    </div>
+                                    <div id="specification" class="container tab-pane fade">
+                                        <h4>Spesifikasi Produk</h4>
+                                        <ul>
+                                            <li>Bahan utama: Ikan tenggiri pilihan</li>
+                                            <li>Tersedia Varian Pedas</li>
+                                            <li>Tersedia Varian Original</li>
+                                            <li>Berat bersih: 250 gram</li>
+                                            <li>Masa simpan: 3 bulan</li>
+                                        </ul>
+                                    </div>
+                                    <div id="reviews" class="container tab-pane fade">
+                                        <div class="reviews-submitted">
+                                            <div class="reviewer">Adella putri - <span>01 Jan 2025</span></div>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <p>
+                                                Terbaiklah Basreng si Boseng
+                                            </p>
+                                        </div>
+                                        <div class="reviews-submit">
+                                            <h4>Give your Review:</h4>
+                                            <div class="ratting">
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <div class="row form">
+                                                <div class="col-sm-6">
+                                                    <input type="text" placeholder="Name">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="email" placeholder="Email">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <textarea placeholder="Review"></textarea>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button>Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product">
+                            <div class="section-header">
+                                <h1>Produk Serupa</h1>
+                            </div>
+
+                            <div class="row align-items-center product-slider product-slider-3">
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="{{ url_for('product_detail') }}">Basreng Keriuk</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="{{ url_for('product_detail') }}">
+                                                <img src="{{ url_for('static', filename='img/product-10.jpg') }}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                                <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Rp. </span>8.000</h3>
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="{{ url_for('product_detail') }}">Basreng Beukah</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="{{ url_for('product_detail') }}">
+                                                <img src="{{ url_for('static', filename='img/product-9.jpg') }}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                                <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Rp. </span>8.000</h3>
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="{{ url_for('product_detail') }}">Basreng Kriuk</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="{{ url_for('product_detail') }}">
+                                                <img src="{{ url_for('static', filename='img/product-8.jpg') }}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                                <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Rp. </span>8.000</h3>
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="{{ url_for('product_detail') }}">Bunga Basreng</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="{{ url_for('product_detail') }}">
+                                                <img src="{{ url_for('static', filename='img/product-7.jpg') }}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                                <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Rp. </span>8.000</h3>
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="{{ url_for('product_detail') }}">Basreng Kering</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="{{ url_for('product_detail') }}">
+                                                <img src="{{ url_for('static', filename='img/product-2.jpg') }}" alt="Product Image">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{{ url_for('cart') }}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{{ url_for('wishlist') }}"><i class="fa fa-heart"></i></a>
+                                                <a href="{{ url_for('product_detail') }}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>Rp. </span>8.000</h3>
+                                            <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Bar Start -->
+                    <div class="col-lg-4 sidebar">
+                        <div class="sidebar-widget category">
+                            <h2 class="title">Kategori</h2>
+                            <nav class="navbar bg-light">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-utensils"></i>Makanan Ringan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-cookie"></i>Cemilan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-fish"></i>Olahan Ikan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-pepper-hot"></i>Pedas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-box"></i>Paket Hemat</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        
+                        <div class="sidebar-widget widget-slider">
+                            <div class="sidebar-slider normal-slider">
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="{{ url_for('product_detail') }}">Karedok Basreng</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="{{ url_for('product_detail') }}">
+                                            <img src="{{ url_for('static', filename='img/product-7.jpg') }}" alt="Product Image">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Rp. </span>8.000</h3>
+                                        <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                    </div>
+                                </div>
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="{{ url_for('product_detail') }}">Basreng kering</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="{{ url_for('product_detail') }}">
+                                            <img src="{{ url_for('static', filename='img/product-8.jpg') }}" alt="Product Image">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Rp. </span>8.000</h3>
+                                        <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                    </div>
+                                </div>
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="{{ url_for('product_detail') }}">Bunga Basreng</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="{{ url_for('product_detail') }}">
+                                            <img src="{{ url_for('static', filename='img/product-9.jpg') }}" alt="Product Image">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Rp. </span>8.000</h3>
+                                        <a class="btn" href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i>Beli Sekarang</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-widget brands">
+                            <h2 class="title">Produk Unggulan</h2>
+                            <ul>
+                                <li><a href="#">Karedok Basreng </a><span>(45)</span></li>
+                                <li><a href="#">Basreng Kering </a><span>(34)</span></li>
+                                <li><a href="#">Basreng Beukah </a><span>(67)</span></li>
+                                <li><a href="#">Basreng Kriuk</a><span>(74)</span></li>
+                                <li><a href="#">Basreng kering </a><span>(89)</span></li>
+                                <li><a href="#">Bunga Basreng   </a><span>(28)</span></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sidebar-widget tag">
+                            <h2 class="title">Kategori Produk</h2>
+                            <a href="#">Basreng</a>
+                            <a href="#">Pedas</a>
+                            <a href="#">Gurih</a>
+                            <a href="#">Kering</a>
+                            <a href="#">Kriuk</a>
+                            <a href="#">Beukah</a>
+                            <a href="#">Karedok</a>
+                            <a href="#">Bunga</a>
+                            <a href="#">Cemilan</a>
+                            <a href="#">Makanan</a>
+                            <a href="#">Ringan</a>
+                            <a href="#">Snack</a>
+                        </div>
+                    </div>
+                    <!-- Side Bar End -->
+                </div>
+            </div>
+        </div>
+        <!-- Product Detail End -->
+        
+        <!-- Brand Start -->
+        <div class="brand">
+            <div class="container-fluid">
+                <div class="brand-slider">
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-1.png') }}" alt="Brand 1"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-2.png') }}" alt="Brand 2"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-3.png') }}" alt="Brand 3"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-4.png') }}" alt="Brand 4"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-5.png') }}" alt="Brand 5"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-6.png') }}" alt="Brand 6"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-7.png') }}" alt="Brand 7"></div>
+                    <div class="brand-item"><img src="{{ url_for('static', filename='img/brand-8.png') }}" alt="Brand 8"></div>
+            </div>
+        </div>
+        <!-- Brand End -->
+        
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Hubungi Kami</h2>
+                            <div class="contact-info">
+                                <p><i class="fa fa-map-marker"></i>Kp. Rancabogo Rt02 Rw07 Des. Sagaracipta 40381</p>
+                                <p><i class="fa fa-envelope"></i>raflymaulannasirkss@gmail.com</p>
+                                <p><i class="fa fa-phone"></i>+62 816-8064-13</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Follow Us</h2>
+                            <div class="contact-info">
+                                <div class="social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Company Info</h2>
+                            <ul>
+                                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms & Condition</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Purchase Info</h2>
+                            <ul>
+                                <li><a href="#">Pyament Policy</a></li>
+                                <li><a href="#">Shipping Policy</a></li>
+                                <li><a href="#">Return Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row payment align-items-center">
+                    <div class="col-md-6">
+                        <div class="payment-method">
+                            <h2>We Accept:</h2>
+                            <img src="img/payment-method.png" alt="Payment Method" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-security">
+                            <h2>Secured By:</h2>
+                            <img src="img/godaddy.svg" alt="Payment Security" />
+                            <img src="img/norton.svg" alt="Payment Security" />
+                            <img src="img/ssl.svg" alt="Payment Security" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Copyright &copy; <a href="#">Basreng si Boseng</a>. All Rights Reserved</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">
+						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <p>Designed By <a href="https://github.com/Raflyboseng">Rafly Boseng</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->      
+        
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/slick/slick.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+    </body>
+</html>

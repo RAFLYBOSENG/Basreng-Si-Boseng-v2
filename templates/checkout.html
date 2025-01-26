@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basreng si Boseng</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="eCommerce HTML Template Free Download" name="keywords">
+        <meta content="eCommerce HTML Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/slick/slick-theme.css') }}" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.0.18/sweetalert2.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Top bar Start -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-envelope"></i>
+                        raflymaulannasirkss@gmail.com
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone-alt"></i>
+                        +62 816-8064-13
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top bar End -->
+        
+        <!-- Nav Bar Start -->
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="{{ url_for('home') }}" class="navbar-brand">Beranda</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Beranda</a>
+                            <a href="{{ url_for('product') }}" class="nav-item nav-link">Produk</a>
+                            <a href="{{ url_for('product_detail') }}" class="nav-item nav-link">Detail Produk</a>
+                            <a href="{{ url_for('cart') }}" class="nav-item nav-link">Keranjang</a>
+                            <a href="{{ url_for('checkout') }}" class="nav-item nav-link active">Pembayaran</a>
+                            <a href="{{ url_for('my_account') }}" class="nav-item nav-link">Akun Saya</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Halaman Lainnya</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('wishlist') }}" class="dropdown-item">Daftar Keinginan</a>
+                                    <a href="{{ url_for('my_account') }}" class="dropdown-item">Masuk & Daftar</a>
+                                    <a href="{{ url_for('contact') }}" class="dropdown-item">Hubungi Kami</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="{{ url_for('login') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun Pengguna</a>
+                                <div class="dropdown-menu">
+                                    <a href="{{ url_for('login') }}" class="dropdown-item">Masuk</a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->      
+        
+        <!-- Bottom Bar Start -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <input type="text" placeholder="Search">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="user">
+                            <a href="{{ url_for('wishlist') }}" class="btn wishlist">
+                                <i class="fa fa-heart"></i>
+                                <span>(0)</span>
+                            </a>
+                            <a href="{{ url_for('cart') }}" class="btn cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>(0)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar End --> 
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('product') }}">Produk</a></li>
+                    <li class="breadcrumb-item active">Pembayaran</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Checkout Start -->
+        <div class="checkout">
+            <div class="container-fluid"> 
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="checkout-inner">
+                            <div class="billing-address">
+                                <h2>Alamat Penagihan</h2>
+                                <form id="checkoutForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nama Depan</label>
+                                            <input class="form-control" type="text" id="firstName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Nama Belakang</label>
+                                            <input class="form-control" type="text" id="lastName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>E-mail</label>
+                                            <input class="form-control" type="email" id="email" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>No. HP</label>
+                                            <input class="form-control" type="tel" id="mobile" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Alamat Lengkap</label>
+                                            <input class="form-control" type="text" id="address" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Negara</label>
+                                            <select class="custom-select" id="country" required>
+                                                <option selected>Indonesia</option>
+                                                <option>Arab Saudi</option>
+                                                <option>Swiss</option>
+                                                <option>Russia</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Kota</label>
+                                            <input class="form-control" type="text" id="city" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Provinsi</label>
+                                            <input class="form-control" type="text" id="state" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Kode Pos</label>
+                                            <input class="form-control" type="text" id="zipCode" required>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Total Keranjang</h1>
+                                <div id="cart-items">
+                                    <!-- Cart items will be populated here -->
+                                </div>
+                                <p class="sub-total">Sub Total<span>Rp. <span id="subtotal">0</span></span></p>
+                                <p class="ship-cost">Biaya Pengiriman<span>Rp. 7000</span></p>
+                                <h2>Total Grand<span>Rp. <span id="grandTotal">0</span></span></h2>
+                            </div>
+
+                            <div class="checkout-payment">
+                                <div class="payment-methods">
+                                    <h1>Metode pembayaran</h1>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-1" name="payment" value="paypal" required>
+                                            <label class="custom-control-label" for="payment-1">Paypal</label>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-2" name="payment" value="dana">
+                                            <label class="custom-control-label" for="payment-2">Dana</label>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-5" name="payment" value="cod">
+                                            <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkout-btn">
+                                    <button type="button" onclick="placeOrder()">Pesan Sekarang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Checkout End -->
+        
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Hubungi</h2>
+                            <div class="contact-info">
+                                <p><i class="fa fa-map-marker"></i>Kp. Rancabogo Rt02 Rw07 Des. Sagaracipta 40381</p>
+                                <p><i class="fa fa-envelope"></i>raflymaulannasirkss@gmail.com</p>
+                                <p><i class="fa fa-phone"></i>+62 816-8064-13</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Follow Us</h2>
+                            <div class="contact-info">
+                                <div class="social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Informasi Perusahaan</h2>
+                            <ul>
+                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="#">Kebijakan Privasi</a></li>
+                                <li><a href="#">Syarat & Ketentuan</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Informasi Pembelian</h2>
+                            <ul>
+                                <li><a href="#">Kebijakan Pembayaran</a></li>
+                                <li><a href="#">Kebijakan Pengiriman</a></li>
+                                <li><a href="#">Kebijakan Pengembalian</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row payment align-items-center">
+                    <div class="col-md-6">
+                        <div class="payment-method">
+                            <h2>Kami Menerima:</h2>
+                            <img src="{{ url_for('static', filename='img/payment-method.png') }}" alt="Payment Method" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-security">
+                            <h2>Dijamin Oleh:</h2>
+                            <img src="{{ url_for('static', filename='img/godaddy.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/norton.svg') }}" alt="Payment Security" />
+                            <img src="{{ url_for('static', filename='img/ssl.svg') }}" alt="Payment Security" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Hak Cipta &copy; <a href="#">Basreng si Boseng</a>. Seluruh Hak Dilindungi</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">					
+                        <p>Dirancang Oleh <a href="https://github.com/Raflymaulannasir">Rafly Boseng</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->     
+        
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/slick/slick.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <!-- Template Javascript -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+        <script>
+        // Load cart items and update totals when page loads
+        window.onload = function() {
+            loadCartItems();
+        };
+
+        function loadCartItems() {
+            fetch('/cart/items')
+            .then(response => response.json())
+            .then(data => {
+                const cartItemsDiv = document.getElementById('cart-items');
+                let html = '';
+                let subtotal = 0;
+
+                data.items.forEach(item => {
+                    html += `<p>${item.name}<span>Rp. ${item.price}</span></p>`;
+                    subtotal += parseInt(item.price);
+                });
+
+                cartItemsDiv.innerHTML = html;
+                
+                // Update totals
+                document.getElementById('subtotal').textContent = subtotal.toLocaleString('id-ID');
+                const shipping = 7000;
+                const grandTotal = subtotal + shipping;
+                document.getElementById('grandTotal').textContent = grandTotal.toLocaleString('id-ID');
+            });
+        }
+
+        function placeOrder() {
+            // Validate form
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Mohon lengkapi semua data yang diperlukan!'
+                });
+                return;
+            }
+
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                mobile: document.getElementById('mobile').value,
+                address: document.getElementById('address').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipCode: document.getElementById('zipCode').value,
+                paymentMethod: document.querySelector('input[name="payment"]:checked')?.value
+            };
+
+            if (!formData.paymentMethod) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Silakan pilih metode pembayaran!'
+                });
+                return;
+            }
+
+            // Get cart items
+            fetch('/cart/items')
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pesanan Berhasil!',
+                    html: `
+                        <div style="text-align: left">
+                            <p><strong>Detail Pesanan:</strong></p>
+                            ${data.items.map(item => `<p>${item.name} - Rp. ${item.price}</p>`).join('')}
+                            <p><strong>Total: Rp. ${data.total}</strong></p>
+                            <br>
+                            <p><strong>Alamat Pengiriman:</strong></p>
+                            <p>${formData.firstName} ${formData.lastName}</p>
+                            <p>${formData.address}</p>
+                            <p>${formData.city}, ${formData.state} ${formData.zipCode}</p>
+                            <p>${formData.country}</p>
+                            <br>
+                            <p><strong>Metode Pembayaran:</strong> ${formData.paymentMethod}</p>
+                        </div>
+                    `,
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Clear cart and redirect
+                        fetch('/cart/clear', {method: 'POST'})
+                        .then(() => {
+                            window.location.href = '/';
+                        });
+                    }
+                });
+            });
+        }
+        </script>
+    </body>
+</html>
